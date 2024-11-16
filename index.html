@@ -1,0 +1,364 @@
+<!---
+
+6 + 3 + 6 
+cross  
+6 + 3 + 6 
+
+
+50px cer cell 
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludo</title>
+    <style>
+        :root {
+            --red: rgb(200, 0, 0);
+            --green: rgb(0, 200, 0);
+            --blue: rgb(0, 0, 200);
+            --yellow: yellow;
+        }
+        .home {
+            border: 1px solid black;
+        }
+
+        #ludo {
+            border: 2px solid black;
+            border-radius: 4px;
+            margin-left: 40px;
+        }
+
+        /* high level boxes */
+        #start-1 {
+            background-color: var(--red);
+            grid-row: 1 / 7;
+            grid-column: 1 /7 ;
+        }
+        .start {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #inner-box {
+            width: 50%;
+            height: 50%;
+            background-color: white;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .piece-home {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+        }
+        .red {
+            background-color: var(--red);
+        }
+        .yellow {
+            background-color: var(--yellow);
+        }
+        .blue {
+            background-color: var(--blue);
+        }
+        .green {
+            background-color: var(--green);
+        }
+
+        .red-piece{
+            background-image: url("./images/red.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%; 
+        }
+        .yellow-piece{
+            background-image: url("./images/yellow.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%; 
+        }
+        .green-piece{
+            background-image: url("./images/green.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%; 
+        }
+        .blue-piece{
+            background-image: url("./images/blue.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%; 
+        }
+        .star {
+            background-image: url("./images/star.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50%;            
+        }
+
+        #vertical1 {
+            grid-row: 1 / 7;
+            grid-column: 7 /10 ;
+        }
+
+        #start-2 {
+            background-color: var(--yellow);
+            grid-row: 1 / 7;
+            grid-column: 10 /16 ;
+        }
+
+        #horizontal1 {
+            grid-row: 7 / 10;
+            grid-column: 1 / 7;
+        }
+        #home {
+            grid-row: 7 / 10;
+            grid-column: 7 / 10;
+        }
+        #horizontal2 {
+            grid-row: 7 / 10;
+            grid-column: 10 / 16; 
+        }
+
+        #start-3 {
+            background-color: var(--blue);
+            grid-row: 10 / 16;
+            grid-column: 1 /7 ;
+        }
+        #vertical2 {
+            grid-row: 10 / 16;
+            grid-column: 7 /10 ;
+        }
+        #start-4 {
+            background-color: var(--green);
+            grid-row: 10 / 16;
+            grid-column: 10 /16 ;
+        }
+
+        #ludo {
+            display: grid;
+            grid-template-columns: repeat(15, 1fr);
+            grid-template-rows: repeat(15, 1fr);
+            width: 750px;
+            height: 750px;
+        }
+
+        /* buttons */
+        .horizontal {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+        .vertical {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+        }
+
+        .cell {
+            border: 1px solid black;
+
+        }
+        #home {
+            border-color: var(--yellow) var(--green) var(--blue) var(--red);
+            border-width: 100px 100px 100px 100px;
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;"> Ludo Game </h1>
+    <div id="ludo">
+        <div class="start" id="start-1">
+            <div id="inner-box">
+                <div class="piece-home red">
+
+                </div>
+                <div class="piece-home red">
+
+                </div>
+                <div class="piece-home red">
+
+                </div>
+                <div class="piece-home red">
+
+                </div>
+            </div>
+        </div>
+        <div class="path vertical" id="vertical1">
+
+        </div>
+        <div class="start" id="start-2">
+            <div id="inner-box">
+                <div class="piece-home yellow">
+
+                </div>
+                <div class="piece-home yellow">
+
+                </div>
+                <div class="piece-home yellow">
+
+                </div>
+                <div class="piece-home yellow">
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="path horizontal" id="horizontal1">
+
+        </div>
+        <div class="home" id="home">
+            <div id="home-item"></div>
+        </div>
+        <div class="path horizontal" id="horizontal2">
+
+        </div>
+
+        <div class="start" id="start-3">
+            <div id="inner-box">
+                <div class="piece-home blue">
+
+                </div>
+                <div class="piece-home blue">
+
+                </div>
+                <div class="piece-home blue">
+
+                </div>
+                <div class="piece-home blue">
+
+                </div>
+            </div>        </div>
+        <div class="path vertical" id="vertical2">
+
+        </div>
+        <div class="start" id="start-4">
+            <div id="inner-box">
+                <div class="piece-home green">
+
+                </div>
+                <div class="piece-home green">
+
+                </div>
+                <div class="piece-home green">
+
+                </div>
+                <div class="piece-home green">
+
+                </div>
+            </div>        
+        </div>
+    
+    </div>
+    
+    <script>
+        var v1 = document.getElementById("vertical1");
+
+        for(let j =0; j < 18; j++){
+            var button = document.createElement("button");
+            button.className = "cell";
+            button.classList.add(`cell${j}`);
+
+            if ([4, 5, 7, 10, 13, 16].includes(j)){
+                button.classList.add("yellow")
+            }
+            if ([5, 6].includes(j)){
+                button.classList.add("star")
+            }
+            v1.appendChild(button)
+        }
+
+
+        var v1 = document.getElementById("vertical2");
+
+        for(let j =0; j < 18; j++){
+            var button = document.createElement("button");
+            button.className = "cell";
+            button.classList.add(`cell${j}`);
+
+            if ([1, 4, 7, 10, 12, 13].includes(j)){
+                button.classList.add("blue")
+            }
+            if ([11, 12].includes(j)){
+                button.classList.add("star")
+            }
+
+            v1.appendChild(button)
+        }
+
+
+        var v1 = document.getElementById("horizontal1");
+
+        for(let j =0; j < 18; j++){
+            var button = document.createElement("button");
+            button.className = "cell";
+            button.classList.add(`cell${j}`);
+
+            if ([1, 7, 8, 9, 10, 11].includes(j)){
+                button.classList.add("red")
+            }
+            if ([1, 14].includes(j)){
+                button.classList.add("star")
+            }
+
+            v1.appendChild(button)
+        }
+
+
+        var v1 = document.getElementById("horizontal2");
+
+        for(let j =0; j < 18; j++){
+            var button = document.createElement("button");
+            button.className = "cell";
+            button.classList.add(`cell${j}`);
+
+            if ([6, 7, 8, 9, 10, 16].includes(j)){
+                button.classList.add("green")
+            }
+
+            if ([3, 16].includes(j)){
+                button.classList.add("star")
+            }
+
+            v1.appendChild(button)
+        }
+
+        var homes = document.getElementsByClassName("piece-home");
+        for (let k =0; k <homes.length; k++){
+            let home  = homes[k];
+            if (home.classList.contains("red")){
+                home.classList.add("red-piece");
+            }
+            if (home.classList.contains("yellow")){
+                home.classList.add("yellow-piece");
+            }
+            if (home.classList.contains("green")){
+                home.classList.add("green-piece");
+            }
+            if (home.classList.contains("blue")){
+                home.classList.add("blue-piece");
+            }
+        } 
+        
+        document.querySelector(".cell2").classList.add("red-piece");
+
+        document.querySelector(".cell10").classList.add("yellow-piece");
+
+        document.querySelector(".cell9").classList.add("green-piece");
+
+
+        document.querySelector(".cell11").classList.add("blue-piece");
+
+    </script>
+
+</body>
+</html>
